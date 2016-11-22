@@ -1,13 +1,6 @@
 <?php
 	require 'vendor/autoload.php';
 
-	// $hosts = [
- //    	'172.24.144.47:9200'  // SSL to IP + Port
-	// ];
-
-	// $client = Elasticsearch\ClientBuilder::create() // Instantiate a new ClientBuilder
-	//                     ->setHosts($hosts)      // Set the hosts
-	//                     ->build(); 
 	$client = Elasticsearch\ClientBuilder::create()->build();	                
 
 	if(!empty($_POST)) {
