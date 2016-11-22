@@ -11,8 +11,7 @@ You're all set!
 
 ## Software Requirements
 
-* PHP 5.6.4 or later
-* MySQL 5.6.x or later
+* PHP 5.5.9 or later
 * Apache 2.4.x
 * Curl - latest stable
 * Elastic Search Server
