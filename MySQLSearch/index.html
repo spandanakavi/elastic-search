@@ -1,0 +1,101 @@
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Searching in MySQL</h1>
+		<div class="row">
+			<h3>Article Table</h3>
+			<table id="articles" class="table table-bordered">
+				<thead>
+					<th>Title</th>
+					<th>Content</th>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<h3>Media Table</h3>
+			<table id="media" class="table table-bordered">
+				<thead>
+					<th>Title</th>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<form>
+				<label for='search'> Search against two tables</label> <input
+					type='text' name='search'> <input type="submit">
+			</form>
+		</div>
+		<div class="row">
+			<h3>Search Result Table</h3>
+			<table id="search" class="table table-bordered">
+				<thead>
+					<th>Title</th>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+<script>
+$(document).ready(function() {
+	$('form').on('submit', function(event) {
+		event.preventDefault();
+		 
+		$.ajax({
+			  type: "POST",
+			  url: "mysql_search.php",
+			  data: {
+				  'search' : $(this).find('input[name=search]').val()
+			  },
+			  success: function(data) {
+					$.each(data, function(index, element) {
+						$('table#' + index + ' tbody').html('');
+			            var sourceToAppend = $('table#' + index + ' tbody');
+			            $.each(element, function(subindex, subelement) {
+			            	var toBeAppended = '<tr><td>' + subelement.title + '</td>';
+			            	if (subelement.content !== undefined) {
+			            		toBeAppended = toBeAppended + '<td>' + subelement.content + '</td>';
+			            	}
+		                    toBeAppended = toBeAppended + '</tr>';
+		                    sourceToAppend.append(toBeAppended);
+				        });
+			        })
+			  },
+			  dataType: 'json'
+			});
+	});
+	$.ajax({
+		url : "mysql_search.php",
+		dataType: 'json',
+		success : function(data) {
+			$.each(data, function(index, element) {
+	            var sourceToAppend = $('table#' + index + ' tbody');
+	            $.each(element, function(subindex, subelement) {
+	            	var toBeAppended = '<tr><td>' + subelement.title + '</td>';
+	            	if (subelement.content !== undefined) {
+	            		toBeAppended = toBeAppended + '<td>' + subelement.content + '</td>';
+	            	}
+                    toBeAppended = toBeAppended + '</tr>';
+                    sourceToAppend.append(toBeAppended);
+		        });
+	        });
+		}
+	})
+});
+</script>
+
+</html>
