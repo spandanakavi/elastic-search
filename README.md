@@ -65,40 +65,40 @@ verify it is installed:
 
 ##cURL calls
 
-Get the list of nodes 
+Get the list of nodes - 
 curl -XGET 'localhost:9200/_cat/nodes?v&pretty'
 
-Get the list of indices 
+Get the list of indices - 
 curl -XGET 'localhost:9200/_cat/indices?v&pretty'
 
-Index a document 
+Index a document - 
 curl -XPUT 'localhost:9200/index_name/type_name/id(optional)?pretty&pretty' -d'
 {
   "field_name": "your_data"
 }'
 
-Get the indexed documet
+Get the indexed document - 
 curl -XGET 'localhost:9200/index_name/type_name/id?pretty&pretty'
 
-Delete an index 
+Delete an index  - 
 curl -XDELETE 'localhost:9200/index?pretty&pretty'
 
-Modify data in a document
+Modify data in a document - 
 curl -XPUT 'localhost:9200/index_name/type_name/id?pretty&pretty' -d'
 {
   "field_name": "modified data"
 }'
 
-Update a document
+Update a document - 
 curl -XPOST 'localhost:9200/index_name/type_name/id/_update?pretty&pretty' -d'
 {
   "field_name": { "field_name": "modified data", "field_name": "modified data" }
 }'
 
-Delete a documents
+Delete a documents - 
 curl -XDELETE 'localhost:9200/index_name/type_name/id?pretty&pretty'
 
-Search 
+Search - 
 curl -XGET 'localhost:9200/index_name/_search?pretty' -d'
 {
   "query": {
@@ -111,7 +111,7 @@ curl -XGET 'localhost:9200/index_name/_search?pretty' -d'
   }
 }'
 
-Aggregations 
+Aggregations - 
 curl -XGET 'localhost:9200/index_name/type_name/_search?pretty' -d'
 {
     "size" : 0,
